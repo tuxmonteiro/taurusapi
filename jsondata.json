@@ -1,0 +1,1 @@
+{"execution":[{"write-xml-jtl": "full","concurrency":10,"hold-for":"20s","scenario":"json_example"}],"scenarios":{"json_example":{"retrieve-resources":false,"headers":{"host":"test.localhost"},"requests":["http://127.0.0.1:8000"]}},"reporting":[{"module":"final-stats"}],"settings":{"check-interval":"5s","default-executor":"jmeter"},"provisioning":"local"}
