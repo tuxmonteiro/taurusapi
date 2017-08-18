@@ -1,4 +1,4 @@
-# TaurusAPI - BlazeMeter Taurus by API
+# TaurusAPI - BlazeMeter Taurus API
 
 ## Dependency
 TaurusAPI depends BZT (BlazeMeter Taurus).
