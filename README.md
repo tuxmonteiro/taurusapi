@@ -11,7 +11,9 @@ mvn clean package -DskipTests spring-boot:run -Dbzt.cmd=/usr/local/bin/bzt
 
 ## Creating test
 ```bash
-curl -XPOST -H 'content-type: application/json' -d @jsondata.json  -v 127.0.0.1:8080/test
+curl -XPOST -H 'content-type: application/json' -d @test.json -v 127.0.0.1:8080/test
+# OR
+# curl -XPOST -H 'content-type: text/yaml' -d @test.yml -v 127.0.0.1:8080/test
 ```
 
 ## Show all tests

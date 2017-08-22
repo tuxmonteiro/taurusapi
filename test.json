@@ -12,7 +12,7 @@
       "modifications": [
         {
           "element": "KPI Writer",
-          "enabled": "false"
+          "enabled": false
         }
       ],
       "retrieve-resources": false,
