@@ -61,13 +61,14 @@ public class TestController {
         return ResponseEntity.notFound().build();
     }
 
-    @RequestMapping(method = RequestMethod.POST, consumes = "application/json")
+    @RequestMapping(method = RequestMethod.POST, consumes = { "application/json", "text/yaml", "application/yaml" } )
     public ResponseEntity<?> createTest(@RequestBody(required = false) String body, final HttpServletRequest request) {
         if (body != null && !body.isEmpty()) {
             try {
                 long testId = incrementableId.incrementAndGet();
                 final URI locationURI = URI.create(request.getRequestURL().toString().replaceAll("/$", "") + "/" + testId);
-                taskRunnerService.put(testId, body);
+                final String contentType = request.getContentType();
+                taskRunnerService.put(testId, body, contentType);
                 return ResponseEntity.created(locationURI).build();
             } catch (JsonSyntaxException e) {
                 return ResponseEntity.badRequest().body(ImmutableMap.of("error","malformed json"));

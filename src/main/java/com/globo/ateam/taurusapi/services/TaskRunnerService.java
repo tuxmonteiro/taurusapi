@@ -31,13 +31,13 @@ public class TaskRunnerService {
         return taurusTmpDir;
     }
 
-    public void put(long testId, String body) {
+    public void put(long testId, String body, String contentType) {
         queue.add(() -> {
             log.info("executing task id " + testId);
             try {
                 String idDir = taurusTmpDir + "/" + testId;
                 if (!Files.exists(Paths.get(idDir))) Files.createDirectory(Paths.get(idDir));
-                String confFile = idDir + "/test.json";
+                String confFile = idDir + "/test." + ("application/json".equalsIgnoreCase(contentType) ? "json" : "yml");
                 try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(confFile))) {
                     writer.write(body);
                 }
