@@ -38,6 +38,10 @@
             <artifactId>guava</artifactId>
             <version>[21.0,)</version>
         </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.dataformat</groupId>
+            <artifactId>jackson-dataformat-yaml</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

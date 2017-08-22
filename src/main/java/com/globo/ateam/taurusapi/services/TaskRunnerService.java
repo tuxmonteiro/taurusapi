@@ -2,6 +2,7 @@ package com.globo.ateam.taurusapi.services;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.MediaType;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -31,17 +32,19 @@ public class TaskRunnerService {
         return taurusTmpDir;
     }
 
-    public void put(long testId, String body, String contentType) {
+    public void put(long testId, byte[] body, String contentType) {
         queue.add(() -> {
             log.info("executing task id " + testId);
             try {
                 String idDir = taurusTmpDir + "/" + testId;
                 if (!Files.exists(Paths.get(idDir))) Files.createDirectory(Paths.get(idDir));
-                String confFile = idDir + "/test." + ("application/json".equalsIgnoreCase(contentType) ? "json" : "yml");
-                try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(confFile))) {
-                    writer.write(body);
+                String confFile = idDir + "/test." + (MediaType.APPLICATION_JSON_VALUE.toUpperCase().contains(contentType.toUpperCase()) ? "json" : "yml");
+                try(FileOutputStream fos = new FileOutputStream(confFile)) {
+                    fos.write(body);
                 }
-                Process process = new ProcessBuilder(BZT_CMD, "-o", "settings.artifacts-dir=" + idDir + "/artifacts-dir", confFile).start();
+                String artifactsDir = idDir + "/artifacts-dir";
+                if (!Files.exists(Paths.get(artifactsDir))) Files.createDirectory(Paths.get(artifactsDir));
+                Process process = new ProcessBuilder(BZT_CMD, "-o", "settings.artifacts-dir=" + artifactsDir, confFile).start();
                 InputStream is = process.getInputStream();
                 InputStreamReader inputStreamReader = new InputStreamReader(is);
                 BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
