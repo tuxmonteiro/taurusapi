@@ -25,7 +25,7 @@
           "jsr223": [
             {
               "language": "beanshell",
-              "script-text": "vars.putObject(\"statsd\", new com.timgroup.statsd.NonBlockingStatsDClient(\"my.test\", \"127.0.0.1\", 8125));",
+              "script-text": "if (vars.getObject(\"statsd\") == null) vars.putObject(\"statsd\", new com.timgroup.statsd.NonBlockingStatsDClient(\"my.test\", \"127.0.0.1\", 8125));",
               "execute": "before"
             },
             {
