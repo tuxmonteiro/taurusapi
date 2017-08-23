@@ -44,7 +44,7 @@ public class TaskRunnerService {
                 }
                 String artifactsDir = idDir + "/artifacts-dir";
                 if (!Files.exists(Paths.get(artifactsDir))) Files.createDirectory(Paths.get(artifactsDir));
-                Process process = new ProcessBuilder(BZT_CMD, "-o", "settings.artifacts-dir=" + artifactsDir, confFile).start();
+                Process process = new ProcessBuilder(BZT_CMD, "-v", "-o", "settings.artifacts-dir=" + artifactsDir, confFile).start();
                 InputStream is = process.getInputStream();
                 InputStreamReader inputStreamReader = new InputStreamReader(is);
                 BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
