@@ -1,25 +1,12 @@
 ---
 execution:
 - concurrency: 1000
-  hold-for: 1m
+  hold-for: 5m
   scenario: json_example
-  write-xml-jtl: null
-modules:
-  console:
-    disable: true
-  final-stats:
-    disable: true
-  aggregator: null
-provisioning: local
-reporting:
-- module: final-stats
 scenarios:
   json_example:
     headers:
       host: test.com
-    modifications:
-    - element: KPI Writer
-      enabled: false
     requests:
     - jsr223:
       - execute: before
@@ -38,7 +25,3 @@ scenarios:
           statsd.recordGaugeValue("bytesPerSec", (sampler.sample().getBytes()/reqTime));
       url: http://127.0.0.1:8000
     retrieve-resources: false
-settings:
-  check-interval: 1m
-  default-executor: jmeter
-  check-updates: false
