@@ -1,7 +1,7 @@
 ---
 execution:
 - concurrency: 1000
-  hold-for: 5m
+  hold-for: 1m
   scenario: json_example
   write-xml-jtl: null
 modules:
@@ -9,6 +9,7 @@ modules:
     disable: true
   final-stats:
     disable: true
+  aggregator: null
 provisioning: local
 reporting:
 - module: final-stats
@@ -27,13 +28,17 @@ scenarios:
           vars.putObject("statsd", new com.timgroup.statsd.NonBlockingStatsDClient("my.test", "127.0.0.1", 8125));
       - execute: after
         language: beanshell
-        script-text: import com.timgroup.statsd.StatsDClient; StatsDClient statsd
-          = (StatsDClient) vars.getObject("statsd"); long reqTime = sampler.sample().getTime(); if (reqTime == 0L) reqTime=1L;
-          statsd.incrementCounter("http" + sampler.sample().getResponseCode()); statsd.recordExecutionTime("requestTime",
-          reqTime); statsd.recordGaugeValue("bytesPerSec", (sampler.sample().getBytes()/reqTime));
+        script-text:
+          import com.timgroup.statsd.StatsDClient;
+          StatsDClient statsd = (StatsDClient) vars.getObject("statsd");
+          long reqTime = sampler.sample().getTime();
+          if (reqTime == 0L) reqTime=1L;
+          statsd.incrementCounter("http" + sampler.sample().getResponseCode());
+          statsd.recordExecutionTime("requestTime", reqTime);
+          statsd.recordGaugeValue("bytesPerSec", (sampler.sample().getBytes()/reqTime));
       url: http://127.0.0.1:8000
     retrieve-resources: false
 settings:
-  check-interval: 5s
+  check-interval: 1m
   default-executor: jmeter
-
+  check-updates: false
