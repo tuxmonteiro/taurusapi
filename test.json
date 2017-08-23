@@ -1,0 +1,59 @@
+{
+  "execution": [
+    {
+      "write-xml-jtl": null,
+      "concurrency": 1000,
+      "hold-for": "5m",
+      "scenario": "json_example"
+    }
+  ],
+  "scenarios": {
+    "json_example": {
+      "modifications": [
+        {
+          "element": "KPI Writer",
+          "enabled": false
+        }
+      ],
+      "retrieve-resources": false,
+      "headers": {
+        "host": "test.com"
+      },
+      "requests": [
+        {
+          "url": "http://127.0.0.1:8000",
+          "jsr223": [
+            {
+              "language": "beanshell",
+              "script-text": "if (vars.getObject(\"statsd\") == null) vars.putObject(\"statsd\", new com.timgroup.statsd.NonBlockingStatsDClient(\"my.test\", \"127.0.0.1\", 8125));",
+              "execute": "before"
+            },
+            {
+              "language": "beanshell",
+              "script-text": "import com.timgroup.statsd.StatsDClient; StatsDClient statsd = (StatsDClient) vars.getObject(\"statsd\"); long reqTime = sampler.sample().getTime(); if (reqTime == 0L) reqTime=1L; statsd.incrementCounter(\"http\" + sampler.sample().getResponseCode()); statsd.recordExecutionTime(\"requestTime\", reqTime); statsd.recordGaugeValue(\"bytesPerSec\", (sampler.sample().getBytes()/reqTime));",
+              "execute": "after"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "reporting": [
+    {
+      "module": "final-stats"
+    }
+  ],
+  "settings": {
+    "check-interval": "5s",
+    "default-executor": "jmeter"
+  },
+  "provisioning": "local",
+  "modules": {
+    "console": {
+      "disable": true
+    },
+    "final-stats": {
+      "disable": true
+    }
+  }
+}
