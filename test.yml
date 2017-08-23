@@ -28,7 +28,7 @@ scenarios:
       - execute: after
         language: beanshell
         script-text: import com.timgroup.statsd.StatsDClient; StatsDClient statsd
-          = (StatsDClient) vars.getObject("statsd"); long reqTime = sampler.sample().getTime();
+          = (StatsDClient) vars.getObject("statsd"); long reqTime = sampler.sample().getTime(); if (reqTime == 0L) reqTime=1L;
           statsd.incrementCounter("http" + sampler.sample().getResponseCode()); statsd.recordExecutionTime("requestTime",
           reqTime); statsd.recordGaugeValue("bytesPerSec", (sampler.sample().getBytes()/reqTime));
       url: http://127.0.0.1:8000
