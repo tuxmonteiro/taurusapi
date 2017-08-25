@@ -3,5 +3,10 @@
     <option name="highlightColor" value="80cbc4" />
     <option name="isMaterialDesign" value="false" />
     <option name="wallpaperSet" value="false" />
+    <option name="useMaterialIcons" value="false" />
+    <option name="useProjectViewDecorators" value="false" />
+    <option name="statusBarTheme" value="false" />
+    <option name="isMaterialTheme" value="false" />
+    <option name="themedScrollbars" value="false" />
   </component>
 </application>
