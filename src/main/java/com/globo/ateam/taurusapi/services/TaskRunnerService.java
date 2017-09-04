@@ -16,9 +16,26 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.concurrent.*;
 
+import static com.globo.ateam.taurusapi.services.TaskRunnerService.Mapper.JSON_MAPPER;
+import static com.globo.ateam.taurusapi.services.TaskRunnerService.Mapper.YAML_MAPPER;
+
 @SuppressWarnings("FieldCanBeLocal")
 @Service
 public class TaskRunnerService {
+
+    enum Mapper {
+        YAML_MAPPER(new YAMLFactory()),
+        JSON_MAPPER(new JsonFactory());
+
+        public ObjectMapper value() {
+            return mapper;
+        }
+
+        private final ObjectMapper mapper;
+        Mapper(JsonFactory factory) {
+            mapper = new ObjectMapper(factory);
+        }
+    }
 
     private static final String TMP_DIR = System.getProperty("java.io.tmpdir", "/tmp");
     private static final String BZT_CMD = System.getProperty("bzt.cmd", "/usr/local/bin/bzt");
@@ -31,8 +48,6 @@ public class TaskRunnerService {
     private final ConcurrentLinkedQueue<Callable<Result>> queue = new ConcurrentLinkedQueue<>();
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private final String taurusTmpDir = TMP_DIR + "/taurusconfs";
-    private final ObjectMapper yamlMapper = new ObjectMapper(new YAMLFactory());
-    private final ObjectMapper jsonMapper = new ObjectMapper(new JsonFactory());
 
     public TaskRunnerService() throws IOException {
         log.info("Using " + taurusTmpDir + " as tmpdir");
@@ -105,8 +120,7 @@ public class TaskRunnerService {
         StringBuilder result = new StringBuilder();
         String line;
         while ((line = bufferedReader.readLine()) != null) {
-            result.append(line);
-            result.append(BRK_LN);
+            result.append(line).append(BRK_LN);
         }
         return result.toString();
     }
@@ -121,7 +135,7 @@ public class TaskRunnerService {
     }
 
     private byte[] buildConf(byte[] body, String mediaType) throws IOException {
-        final ObjectMapper mapper = ("yml".equals(mediaType)) ? yamlMapper : jsonMapper;
+        final ObjectMapper mapper = ("yml".equals(mediaType)) ? YAML_MAPPER.value() : JSON_MAPPER.value();
         ObjectNode root = (ObjectNode) mapper.readTree(body);
         ObjectNode settings = mapper.createObjectNode();
         settings.put("check-updates", false);

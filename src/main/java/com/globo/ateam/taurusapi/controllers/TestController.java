@@ -39,10 +39,10 @@ public class TestController {
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<?> getTests(final HttpServletRequest request) throws IOException {
         log.info("GET /test");
-        Path thanosTmpDir = Paths.get(taskRunnerService.getTaurusTmpDir());
-        if (Files.exists(thanosTmpDir)) {
+        Path taurusTmpDir = Paths.get(taskRunnerService.getTaurusTmpDir());
+        if (Files.exists(taurusTmpDir)) {
             final String requestUrl = request.getRequestURL().toString().replaceAll("/$", "");
-            final Stream<String> listOfThanosTmpDir = Files.list(thanosTmpDir)
+            final Stream<String> listOfThanosTmpDir = Files.list(taurusTmpDir)
                     .filter(f -> Files.isDirectory(f))
                     .map(s -> requestUrl + "/" + s.toString().replaceAll(".*/", ""));
             return ResponseEntity.ok(gson.toJson(listOfThanosTmpDir.collect(Collectors.toList())));
@@ -82,9 +82,9 @@ public class TestController {
     @RequestMapping(method = RequestMethod.DELETE)
     public ResponseEntity<?> cleanup() throws IOException {
         log.info("DELETE /test");
-        Path thanosTmpDir = Paths.get(taskRunnerService.getTaurusTmpDir());
-        if (Files.exists(thanosTmpDir)) {
-            Files.list(thanosTmpDir).filter(f -> Files.isDirectory(f)).forEach(path -> {
+        Path taurusTmpDir = Paths.get(taskRunnerService.getTaurusTmpDir());
+        if (Files.exists(taurusTmpDir)) {
+            Files.list(taurusTmpDir).filter(f -> Files.isDirectory(f)).forEach(path -> {
                 try {
                     Files.walk(path).sorted(Comparator.reverseOrder()).forEach(f -> {
                         try {
