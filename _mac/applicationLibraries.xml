@@ -826,32 +826,6 @@
         <root url="file://$USER_HOME$/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/ffi-1.9.18/libtest" />
       </SOURCES>
     </library>
-    <library name="fpm (v1.8.0, rbenv: 2.3.0) [gem]">
-      <CLASSES>
-        <root url="file://$USER_HOME$/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/fpm-1.8.0/bin" />
-        <root url="file://$USER_HOME$/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/fpm-1.8.0/lib" />
-        <root url="file://$USER_HOME$/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/fpm-1.8.0/templates" />
-      </CLASSES>
-      <JAVADOC />
-      <SOURCES>
-        <root url="file://$USER_HOME$/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/fpm-1.8.0/bin" />
-        <root url="file://$USER_HOME$/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/fpm-1.8.0/lib" />
-        <root url="file://$USER_HOME$/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/fpm-1.8.0/templates" />
-      </SOURCES>
-    </library>
-    <library name="fpm (v1.8.1, rbenv: 2.3.0) [gem]">
-      <CLASSES>
-        <root url="file://$USER_HOME$/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/fpm-1.8.1/bin" />
-        <root url="file://$USER_HOME$/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/fpm-1.8.1/lib" />
-        <root url="file://$USER_HOME$/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/fpm-1.8.1/templates" />
-      </CLASSES>
-      <JAVADOC />
-      <SOURCES>
-        <root url="file://$USER_HOME$/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/fpm-1.8.1/bin" />
-        <root url="file://$USER_HOME$/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/fpm-1.8.1/lib" />
-        <root url="file://$USER_HOME$/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/fpm-1.8.1/templates" />
-      </SOURCES>
-    </library>
     <library name="gelf (v3.0.0, rbenv: 2.3.0) [gem]">
       <CLASSES>
         <root url="file://$USER_HOME$/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/gelf-3.0.0/lib" />
