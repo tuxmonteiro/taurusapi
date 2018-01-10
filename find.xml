@@ -1,11 +1,11 @@
 <application>
   <component name="FindSettings">
     <option name="caseSensitive" value="true" />
-    <option name="customScope" value="Directory '.../api/src [api]'" />
-    <option name="defaultScopeName" value="Directory '.../api/src [api]'" />
+    <option name="customScope" value="Directory '.../newcore/src/main/java [newcore]'" />
+    <option name="defaultScopeName" value="Directory '.../newcore/src/main/java [newcore]'" />
     <option name="localRegularExpressions" value="true" />
     <option name="CASE_SENSITIVE_SEARCH" value="true" />
     <option name="LOCAL_REGULAR_EXPRESSIONS" value="true" />
-    <option name="SEARCH_SCOPE" value="Directory '.../api/src [api]'" />
+    <option name="SEARCH_SCOPE" value="Directory '.../newcore/src/main/java [newcore]'" />
   </component>
 </application>
