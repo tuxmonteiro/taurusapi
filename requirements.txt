@@ -28,7 +28,7 @@ psutil==5.2.2
 py==1.4.34
 pytest==3.2.1
 PyVirtualDisplay==0.2.1
-PyYAML==3.12
+PyYAML==5.4
 requests==2.18.4
 selenium==3.5.0
 six==1.10.0
